@@ -56,7 +56,7 @@ async function run() {
     //get appointment by email api
     app.get("/appointments",verifyToken, async (req, res) => {
       const email = req?.query?.email;
-      const date = new Date(req.query.date).toLocaleDateString();
+      const date = req.query.date;
       // console.log(email);
       const query = { email: email, date: date };
       const cursor = appointmentCollection.find(query);
