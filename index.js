@@ -54,7 +54,7 @@ async function run() {
       res.send(result);
     });
     //get appointment by email api
-    app.get("/appointments", async (req, res) => {
+    app.get("/appointments",verifyToken, async (req, res) => {
       const email = req?.query?.email;
       const date = new Date(req.query.date).toLocaleDateString();
       // console.log(email);
@@ -107,7 +107,7 @@ async function run() {
       const result = await usersCollection.updateOne(filter, updateDoc)
       res.json(result)
          }else{
-           res.status(401).json({message:'you do not have access to make admin'})
+           res.status(403).json({message:'you do not have access to make admin'})
          }
       }
       // console.log(user);
